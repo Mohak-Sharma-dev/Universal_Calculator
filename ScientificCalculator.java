@@ -71,6 +71,11 @@ public class ScientificCalculator extends Calculator {
 
             choice = input.nextInt();
 
+
+
+
+            
+
             double degrees;
             switch (choice) {
                 case 1:
