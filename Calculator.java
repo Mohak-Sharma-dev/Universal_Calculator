@@ -42,15 +42,16 @@ public class Calculator{
 
     public static void displayCalculator(){
 
+        System.out.println("\nWelcome to the Basic Calculator!");
         int count = -1;
         while(count != 0 ){
 
-            System.out.println("\nWelcome to the Universal Calculator! \n Choose any of the given options:\n");
-            System.out.println("1. Add");
-            System.out.println("2. Subtract");
-            System.out.println("3. Multiply");
-            System.out.println("4. Divide");
-            System.out.println("5. Modulus");
+            System.out.println("Choose any of the given options:\n");
+            System.out.println("1. Add\t2. Subtract\t3. Multiply\t4. Divide\t5. Modulus");
+            // System.out.println("2. Subtract");
+            // System.out.println("3. Multiply");
+            // System.out.println("4. Divide");
+            // System.out.println("5. Modulus");
 
             // Scanner input = new Scanner(System.in);
 
