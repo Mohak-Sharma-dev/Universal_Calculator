@@ -1,12 +1,13 @@
+
 import java.util.Scanner;
 
 public class ScientificCalculator extends Calculator {
 
     static Scanner input = new Scanner(System.in);
     public static int count = -1;
-
     public ScientificCalculator(long result, long num2, long num1) {
         super(result, num2, num1);
+        //TODO Auto-generated constructor stub
     }
 
 /***************************************************************************/
@@ -133,10 +134,5 @@ public class ScientificCalculator extends Calculator {
         System.out.println();
         System.out.println();
 
-    }
-
-
-
-
-     
+    }     
 }
