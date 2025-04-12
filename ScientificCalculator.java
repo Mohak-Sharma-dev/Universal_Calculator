@@ -1,12 +1,13 @@
-public class ScientificCalc extends Calculator {
+public class ScientificCalculator extends Calculator {
 
-    public ScientificCalc(long result, long num2, long num1) {
+    public ScientificCalculator(long result, long num2, long num1) {
         super(result, num2, num1);
+        //TODO Auto-generated constructor stub
     }
 
 /***************************************************************************/
 
-    public static 
+    // public static 
 
 
      
