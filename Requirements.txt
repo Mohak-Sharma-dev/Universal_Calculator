@@ -1,0 +1,35 @@
+OOP 2nd Semester Project.
+
+Sir Mohsin.
+
+Requirements: 
+The program/project must be able to demonstrate the following concepts:
+
+-Composition
+-Agregation.
+-Inheritance
+-Threading
+
+Composition is "part of" relationship.
+-display is part of calculator, so that't covered.
+-functions are part of calc, and can't exist without it.
+
+Agregation is "has " relationship.
+-The calculator has UI, and does not nessesarily requires it.
+
+Plan to implement GUI:
+	1.Make CalculatorUI class.
+	2.Implement CalculatorUI in BasicUI.
+		Make display and getinput method.
+	3.Use UI in Calculator [ make a constructor, make and implement start method as well]
+	4.Use in main. use run method. Make Objs of both Calculator and UI.
+	
+	
+
+Inheritance is extending another class.
+-Calculator is parent and Sci, Programming and Financial calculators are child classes.
+
+Threading is processes apart from main thread.
+-finding large factorials/Fibonacci numbers, etc are threaded.
+
+ 

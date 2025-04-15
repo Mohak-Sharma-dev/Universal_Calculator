@@ -6,14 +6,25 @@ public class Calculator{
     private static long num1;
     private static long num2;
     private static long result;
+    private final CalculatorUI ui;// Assuming BasicUI implements CalculatorUI
 
     static Scanner input = new Scanner(System.in);
 
     
-    public Calculator(long result, long num2, long num1){
+    public Calculator(long result, long num2, long num1,CalculatorUI ui){
         Calculator.num1 = num1;
         Calculator.num2 = num2;
         Calculator.result = result;
+        this.ui = ui;
+    }
+
+    public void start(){
+        if(ui != null){
+            ui.display();
+            ui.getInput();
+        }else{
+            System.out.println("No UI detected. Running without.");
+        }
     }
 
     public long getNum1(){
