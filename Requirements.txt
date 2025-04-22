@@ -24,7 +24,16 @@ Plan to implement GUI:
 	3.Use UI in Calculator [ make a constructor, make and implement start method as well]
 	4.Use in main. use run method. Make Objs of both Calculator and UI.
 	
-	
+	Define what the UI should look like:
+		Verticall oreintation.
+		size should follow the golden ratio, height being 1.6 times the widht
+		8 rows and 5 columns
+		display should be at the top. the rest of the buttons should follow
+			operator buttons to the right,like the buttons in reels
+			the numbers should have numpad configuration, exactly like in a modren scientific calc.
+		
+		At the top of the result field/ display, there should be an option to switch to scientific / Programming / Financial calculator.
+		All should have seperate UIs.
 
 Inheritance is extending another class.
 -Calculator is parent and Sci, Programming and Financial calculators are child classes.

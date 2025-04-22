@@ -6,7 +6,7 @@ public class ScientificCalculator extends Calculator {
     static Scanner input = new Scanner(System.in);
     public static int count = -1;
     public ScientificCalculator(long result, long num2, long num1) {
-        super(result, num2, num1);
+        super(result, num2, num1, null);
         //TODO Auto-generated constructor stub
     }
 
