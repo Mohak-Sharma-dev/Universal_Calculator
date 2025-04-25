@@ -1,19 +1,25 @@
 import java.util.Scanner;
 
+//Try catch block kyun nahi lagaya?
+//Arguments kyun nahi diye?
+//Bss do inputs?
+
 public class Calculator {
 
-    private static long num1;
-    private static long num2;
-    private static long result;
+    private static double num1;
+    private static double num2;
+    private static String operation;
+    private static double result;
     private static CalculatorUI ui;// Assuming BasicUI implements CalculatorUI
 
     static Scanner input = new Scanner(System.in);
 
     
-    public Calculator(long result, long num2, long num1,CalculatorUI ui){
+    public Calculator(double result, double num2, double num1,String operation,CalculatorUI ui){
         Calculator.num1 = num1;
         Calculator.num2 = num2;
         Calculator.result = result;
+        Calculator.operation = operation;
         Calculator.ui = ui;
     }
 
@@ -26,15 +32,15 @@ public class Calculator {
         }
     }
 
-    public long getNum1(){
+    public double getNum1(){
         return num1;
     }
 
-    public long getNum2(){
+    public double getNum2(){
         return num2;
     }
 
-    public long getResult(){
+    public double getResult(){
         return result;
     }
 
@@ -46,63 +52,72 @@ public class Calculator {
 
 
     public static void main(String[] args) {
-        // Scanner scanner = new Scanner(System.in);
-        // System.out.println("Enter an expression (e.g., sin(90), log(100)): ");
-        // String input = scanner.nextLine();
 
-        // try {
-        //     double result = parseAndEvaluate(input);
-        //     System.out.println("Result: " + result);
-        // } catch (IllegalArgumentException e) {
-        //     System.out.println("Error: " + e.getMessage());
-        // }
+        System.out.println("Enter operation, num1 and num2");
+        operation = input.nextLine();
+        System.out.println("\n");
+        num1 = input.nextDouble();
+        num2 = input.nextDouble();
+        
+        checkValidity(operation, num1, num2);
 
-        findFactorial();
-    }
+        if (checkValidity(operation, num1, num2) == true) {
 
-    public static long performOperation(String operation,long num1, long num2){
-        switch (operation) {
-            case "Add" -> Add();
-            case "Subtract" -> Subtract();
-            case "Multiply" -> Multiply();
-            case "Divide" -> Divide();
-            case "Modulus" -> Modulus();
-            default -> System.out.println("Invalid Operation.");
+            performOperation(operation,num1,num2);
+
+        }
+        else{
+            System.out.println("Invalid operation.");
         }
 
-        // switch (operation) {
-        //     case "Add" -> Add();
-        //     case "Subtract" -> Subtract();
-        //     case "Multiply" -> Multiply();
-        //     case "Divide" -> Divide();
-        //     case "Modulus" -> Modulus();
-        //     default -> System.out.println("Invalid Operation.");
-        // }
+    }
 
-        //Only execute this part if the UI is not implemented
+/***************************************************************************/
+
+    public static boolean checkValidity(String operation, double num1,double num2){
+
+        return (operation.equals("+")|| operation.equals("-")|| operation.equals("x")|| operation.equals("/")|| operation.equals("%")) && num2 != 0;
+    }
+
+/***************************************************************************/
+
+    public static int askForFurtherCalculations(double result, double num1, double num2, int count){
+
+        System.out.println("Do you want perform another operation on the result?");
+        String cont = input.nextLine();
+        if(cont.equals("Y") || cont.equals("y")){
+            System.out.println("Choose your operation,num1 and num2: ");
+            operation = input.nextLine();
+            System.out.println("\n");
+            num1 = result;
+            num2 = input.nextDouble();
+
+        }else if (cont.equals("N") || cont.equals("n")) {
+            count = 0;
+            System.out.println("Calculator OFF");
+        }
+    
+
+        return count;
+    }
+
+/***************************************************************************/
+
+    public static double performOperation(String operation,double num1, double num2){
+
         if(ui == null){
             System.out.println("\nWelcome to the Basic Calculator!");
             int count = -1;
             while(count != 0 ){
 
-                System.out.println("Choose any of the given options:\n");
-                System.out.println("1. Add\t2. Subtract\t3. Multiply\t4. Divide\t5. Modulus");
-                // System.out.println("2. Subtract");
-                // System.out.println("3. Multiply");
-                // System.out.println("4. Divide");
-                // System.out.println("5. Modulus");
 
-                // Scanner input = new Scanner(System.in);
-
-                int choice = input.nextInt();
-
-                switch (choice) {
-                    case 1 -> Add();
-                    case 2 -> Subtract();
-                    case 3 -> Multiply();
-                    case 4 -> Divide();
-                    case 5 -> Modulus();
-                    case 0 -> {
+                switch (operation) {
+                    case "+" -> result = Add(num1,num2);
+                    case "-" -> result = Subtract(num1,num2);
+                    case "x" -> result = Multiply(num1,num2);
+                    case "/" -> result = Divide(num1,num2);
+                    case "%" -> result = Modulus(num1,num2);
+                    case "OFF" -> {
                         count = 0; 
                         System.out.println("Calculator Turned Off");
                     }
@@ -110,6 +125,20 @@ public class Calculator {
                 }
 
 
+                count = askForFurtherCalculations(result, num1, num2, count);
+                // System.out.println("Do you want perform another operation on the result?");
+                // String cont = input.nextLine();
+                // if(cont.equals("Y") || cont.equals("y")){
+                //     System.out.println("Choose your operation,num1 and num2: ");
+                //     operation = input.nextLine();
+                //     System.out.println("\n");
+                //     num1 = result;
+                //     num2 = input.nextDouble();
+
+                // }else if (cont.equals("N") || cont.equals("n")) {
+                //     count = 0;
+                //     System.out.println("Calculator OFF");
+                // }
             }
         }
 
@@ -117,21 +146,18 @@ public class Calculator {
 
     }
 
-    public static long Add(){
-        System.out.println("Enter Num1 and Num2: ");
-        num1 = input.nextLong();
-        num2 = input.nextLong();
+    public static double Add(double num1, double num2){
+
         result = num1 + num2;
         System.out.println("Result: " + result);
         return result;
+
     }
 
 /***************************************************************************/
 
-    public static long Subtract(){
-        System.out.println("Enter Num1 and Num2: ");
-        num1 = input.nextLong();
-        num2 = input.nextLong();
+    public static double Subtract(double num1,double num2){
+
         result = num1 - num2;
         System.out.println("Result: " + result);
         return result;
@@ -139,10 +165,8 @@ public class Calculator {
 
 /***************************************************************************/
 
-    public static long Multiply(){
-        System.out.println("Enter Num1 and Num2: ");
-        num1 = input.nextLong();
-        num2 = input.nextLong();
+    public static double Multiply(double num1,double num2){
+
         result = num1 * num2;
         System.out.println("Result: " + result);
         return result;
@@ -150,71 +174,69 @@ public class Calculator {
 
 /***************************************************************************/
 
-    public static long Divide(){
-        System.out.println("Enter Num1 and Num2: ");
-        num1 = input.nextLong();
-        num2 = input.nextLong();
-        if(num2 != 0 ){
+    public static double Divide(double num1,double num2)throws ArithmeticException{
+
+        try{
             result = num1 / num2;
             System.out.println("Result: " + result);
+        } catch (ArithmeticException e) {
+            System.out.println("Error: " + e.getMessage());
         }
-        else{System.out.println("Math Error: Cannot Divide by Zero");}
+
         return result;
     }
 
 /***************************************************************************/
 
-    public static long Modulus(){
-        System.out.println("Enter Num1 and Num2: ");
-        num1 = input.nextLong();
-        num2 = input.nextLong();
+    public static double Modulus(double num1,double num2){
+
         result = num1 % num2;
         System.out.println("Result: " + result);
         return result;
     }
 /***************************************************************************/
 
-    public static long findFactorial(){
+    // public static double findFactorial(){
 
-        System.out.println("Enter a number to find factorial: ");
-        long num = input.nextLong();
-        long numcopy = num;
-        long factorial = 1;
+    //     System.out.println("Enter a number to find factorial: ");
+    //  double num = input.nex double();
+    //  double numcopy = num;
+    //  double factorial = 1;
 
-        if(num > 1){
-            // long factorial = 1;
-            for(int i = 1 ; i <= numcopy ; i++){
-                factorial *= num;
-                --num;
-            }
-            System.out.println(factorial);
-        }
-        else
-        {System.out.println("Factorial must of number greater than 1.");}
-        return factorial;
-    }
+    //     if(num > 1){
+    //         // double factorial = 1;
+    //         for(int i = 1 ; i <= numcopy ; i++){
+    //             factorial *= num;
+    //             --num;
+    //         }
+    //         System.out.println(factorial);
+    //     }
+    //     else
+    //     {System.out.println("Factorial must of number greater than 1.");}
+    //     return factorial;
+    // }
 
 /***************************************************************************/
 
-    public static long findFibonacci(){
-        System.out.println("Enter a number to find it's fibonacci sequence upto that number.");
-        long prev = 0;
-        long init = 1;
-        long num = input.nextLong();
-        long numcopy = num;
+    // public static double findFibonacci(){
+    //     System.out.println("Enter a number to find it's fibonacci sequence upto that number.");
+    //     double prev = 0;
+    //     double init = 1;
+    //     double num = input.nex double();
+    //     double numcopy = num;
 
-        if(num > init){
-            long fibonacci = 0;
-            fibonacci += prev;
-            fibonacci += init;
+    //     if(num > init){
+    //         double fibonacci = 0;
+    //         fibonacci += prev;
+    //         fibonacci += init;
 
-            for(int i = 0 ; i <numcopy ; i++){
-                long temp = init;
-                init++;
+    //         for(int i = 0 ; i <numcopy ; i++){
+    //             double temp = init;
+    //             init++;
                 
-            }
-        }
-    }
+    //         }
+    //     }
+    // }
 
 
 /***************************************************************************/
@@ -259,3 +281,11 @@ public class Calculator {
     }
 
 }
+/*
+ * try{
+ * 
+ * }catch(){
+ * 
+ * }
+ * 
+ */
